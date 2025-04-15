@@ -160,7 +160,7 @@ impl<'a, H: Hasher, T: ?Sized + Hashable<H>> Hashable<H> for &'a mut T {
 impl<H: Hasher, T: ?Sized> Hashable<H> for *const T {
     #[allow(trivial_casts, unsafe_code)]
     fn hash(&self, state: &mut H) {
-        if mem::size_of::<Self>() == mem::size_of::<usize>() {
+        if size_of::<Self>() == size_of::<usize>() {
             // Thin pointer
             state.write_usize(*self as *const () as usize);
         } else {
@@ -175,7 +175,7 @@ impl<H: Hasher, T: ?Sized> Hashable<H> for *const T {
 impl<H: Hasher, T: ?Sized> Hashable<H> for *mut T {
     #[allow(trivial_casts, unsafe_code)]
     fn hash(&self, state: &mut H) {
-        if mem::size_of::<Self>() == mem::size_of::<usize>() {
+        if size_of::<Self>() == size_of::<usize>() {
             // Thin pointer
             state.write_usize(*self as *const () as usize);
         } else {

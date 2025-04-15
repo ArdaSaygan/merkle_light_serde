@@ -2,7 +2,7 @@ extern crate alloc;
 
 use alloc::vec::Vec;
 use crate::hash::Algorithm;
-
+use serde::{Serialize, Deserialize};
 /// Merkle tree inclusion proof for data element, for which item = Leaf(Hash(Data Item)).
 ///
 /// Lemma layout:
@@ -12,7 +12,8 @@ use crate::hash::Algorithm;
 /// ```
 ///
 /// Proof validation is positioned hash against lemma path to match root hash.
-#[derive(Debug, Clone, Eq, PartialEq)]
+
+#[derive(Serialize, Deserialize, Debug, Clone, Eq, PartialEq, Default)]
 pub struct Proof<T: Eq + Clone + AsRef<[u8]>> {
     lemma: Vec<T>,
     path: Vec<bool>,
